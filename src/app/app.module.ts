@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BaseComponent } from './base/base.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,12 @@ import { BaseComponent } from './base/base.component';
     UiModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide:"baseUrl",useValue:"https://localhost:7164/api",multi:true} //NOTE:BaseUrl'i merkezi bir yerden değiştiriyoruz, deploy ettiğimizde burdan değiştirmek yeterli olucaktır, aksi takdirde her yerde tek tek değiştirmemiz gerekecek.
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
