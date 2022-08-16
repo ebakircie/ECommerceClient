@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscriber } from 'rxjs';
 import { BaseComponent, SpinnerTypes } from 'src/app/base/base.component';
-import { Product } from 'src/app/contracts/product';
+
 import { HttpClientService } from 'src/app/services/common/http-client.service';
+import { Create_Product } from '../../../contracts/create_product';
 
 @Component({
   selector: 'app-products',
@@ -21,9 +22,9 @@ export class ProductsComponent extends BaseComponent implements OnInit {
    
     // TEST
 
-    this.httpClientService.get<Product[]>({
-      controller:"products"
-    }).subscribe(data=>console.log(data));
+    //this.httpClientService.get<Create_Product[]>({
+    //  controller:"products"
+    //}).subscribe(data=>console.log(data));
 
 /*     this.httpClientService.post({
       controller:"products"
