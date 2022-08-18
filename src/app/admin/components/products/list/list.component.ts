@@ -1,15 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BaseComponent, SpinnerTypes } from '../../../../base/base.component';
+import { List_Product } from '../../../../contracts/list_products';
+import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
+import { ProductService } from '../../../../services/common/models/product.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends BaseComponent implements OnInit {
 
-  constructor() { }
+  constructor(spinner: NgxSpinnerService, private productService: ProductService, private alertifyService: AlertifyService) {
+    super(spinner)
+  }
 
-  ngOnInit(): void {
+  // NOTE: Pagination yaparken bütün datayı çekip öyle göstermeye gerek yok, sadece istenilen data kadar o an çekilmesi daha hızlı olacaktır. Her iki tarafıda ona göre şekillendirmek gerek. 
+
+
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate'];
+  dataSource: MatTableDataSource<List_Product> = null;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  async getProducts() {
+
+    this.showSpinner(SpinnerTypes.BallclipRotateMultiple)
+    const allProducts: { totalCount: number, products: List_Product[] } = await this.productService.listProduct(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5, () => this.hideSpinner(SpinnerTypes.BallclipRotateMultiple), errorMessage => this.alertifyService.message(errorMessage, {
+      dismissOther: true,
+      messageType: MessageType.Error,
+      position: Position.TopRight
+    }))
+
+    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
+    this.paginator.length = allProducts.totalCount;
+  }
+
+  async  pageChanged() {
+    await this.getProducts();
+  }
+
+  async ngOnInit() {
+    await this.getProducts();
   }
 
 }
+

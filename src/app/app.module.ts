@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    {provide:"baseUrl",useValue:"https://localhost:7164/api",multi:true} //NOTE:BaseUrl'i merkezi bir yerden değiştiriyoruz, deploy ettiğimizde burdan değiştirmek yeterli olucaktır, aksi takdirde her yerde tek tek değiştirmemiz gerekecek.
+    {provide:"baseUrl",useValue:"https://localhost:7164/api",multi:true} //NOTE: BaseUrl'i merkezi bir yerden değiştiriyoruz, deploy ettiğimizde burdan değiştirmek yeterli olucaktır, aksi takdirde her yerde tek tek değiştirmemiz gerekecek.
   ],
   bootstrap: [AppComponent]
 })
