@@ -7,6 +7,8 @@ import { List_Product } from '../../../../contracts/list_products';
 import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { ProductService } from '../../../../services/common/models/product.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -21,7 +23,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   // NOTE: Pagination yaparken bütün datayı çekip öyle göstermeye gerek yok, sadece istenilen data kadar o an çekilmesi daha hızlı olacaktır. Her iki tarafıda ona göre şekillendirmek gerek. 
 
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate', 'update', 'delete'];
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -38,6 +40,11 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.paginator.length = allProducts.totalCount;
   }
 
+  //delete(id, event) {
+  //  const img: HTMLImageElement = event.srcElement;
+  //  $(img.parentElement.parentElement).fadeOut(1000);
+  //}
+  
   async  pageChanged() {
     await this.getProducts();
   }

@@ -14,7 +14,8 @@ export class CustomersComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerTypes.Cog);
+    
+    
   }
 
 }
