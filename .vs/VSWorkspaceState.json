@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app\\admin",
-    "\\src\\app\\admin\\components",
-    "\\src\\app\\admin\\components\\products",
-    "\\src\\app\\admin\\components\\products\\list",
-    "\\src\\assets"
+    "\\src\\app",
+    "\\src\\app\\directives",
+    "\\src\\app\\directives\\admin",
+    "\\src\\app\\ui",
+    "\\src\\app\\ui\\components",
+    "\\src\\app\\ui\\components\\home"
   ],
-  "SelectedNode": "\\src\\assets",
+  "SelectedNode": "\\src\\app\\directives\\admin\\delete.directive.ts",
   "PreviewInSolutionExplorer": false
 }
